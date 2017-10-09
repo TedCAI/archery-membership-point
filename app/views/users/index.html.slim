@@ -1,0 +1,16 @@
+table.user
+  thead
+    tr
+      th = "#"
+      th name
+      th email
+      th uid
+      th total score
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.id
+        td = user.name
+        td = user.email
+        td = user.uid
+        td = user.total_score

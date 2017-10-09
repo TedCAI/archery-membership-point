@@ -31,6 +31,14 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'responders', github: 'plataformatec/responders' # https://github.com/plataformatec/responders A set of Rails responders to dry up your application
+gem 'slim' # https://github.com/slim-template/slim
+gem 'active_link_to' # https://github.com/comfy/active_link_to View helper to manage "active" state of a link
+gem "breadcrumbs_on_rails" # https://github.com/weppos/breadcrumbs_on_rails creating and managing a breadcrumb navigation
+# gem "simple-navigation" # https://github.com/codeplant/simple-navigation  creating navigations (with multiple levels) Render your navigation as html list, link list or breadcrumbs.
+gem 'best_in_place', github: 'bernat/best_in_place'#, '~> 3.0.1' # https://github.com/bernat/best_in_place A RESTful unobtrusive jQuery Inplace-Editor and a helper as a Rails Gem
+# Use jquery as the JavaScript library
+gem 'jquery-rails', github: 'rails/jquery-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
