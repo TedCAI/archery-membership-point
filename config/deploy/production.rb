@@ -22,6 +22,7 @@ server '116.62.157.106', user: 'root', roles: %w{app db web}
 # role :db,  %w{deploy@example.com}
 
 set :rvm_ruby_version, '2.4.1'
+set :rvm_custom_path, '/usr/share/rvm/'
 
 # Configuration
 # =============
