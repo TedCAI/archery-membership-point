@@ -1,0 +1,21 @@
+h2 用户详情
+
+h3 积分详情
+
+detail
+  table.score
+    thead
+      tr
+        th = "#"
+        th 日期
+        /th email
+        /th uid
+        /th total score
+    tbody
+      - @membership_records.each do |record|
+        tr
+          td = record.id
+          td = record.record_time
+          /td = user.email
+          /td = user.uid
+          /td = user.total_score
