@@ -43,21 +43,67 @@ gem 'jquery-rails', github: 'rails/jquery-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13.0'
-  gem 'selenium-webdriver'
-end
-
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  # Use Capistrano for deployment
+  gem 'capistrano',  '~> 3.1'
+  gem 'capistrano-rvm'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-passenger'
+  gem 'capistrano-bundler', '~> 1.1.2'
+  gem 'capistrano-maintenance', '~> 1.0', require: false
+  gem 'capistrano-sidekiq'
+  # gem 'rails-footnotes'
+  # gem 'better_errors'
+  # gem 'annotate'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console'
+  gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :development, :test do
+
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platform: :mri
+  gem 'capybara', '~> 2.13.0'
+  gem 'selenium-webdriver'
+
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
+
+  ### rspec and friends
+  # gem 'rspec-rails'
+  ## https://github.com/thoughtbot/shoulda-matchers
+  # gem 'shoulda-matchers'
+  # gem "factory_girl_rails", "~> 4.0"
+
+  # ## test unit
+  # # https://github.com/thoughtbot/shoulda
+  # gem 'shoulda'
+
+  gem 'database_cleaner', '~> 1.3.0'
+
+  gem 'mock_redis'
+  # http://mailcatcher.me
+  # MailCatcher runs a super simple SMTP server which catches any message
+  # sent to it to display in a web interface.
+  # Run `mailcatcher`, set your favourite app to deliver to smtp://127.0.0.1:1025
+  # instead of your default SMTP server,
+  # then check out http://127.0.0.1:1080 to see the mail that's arrived so far.
+  # gem 'mailcatcher', require: false
+
+  # facker data generator
+  # https://github.com/ffaker/ffaker
+  gem 'ffaker'
+
+  gem 'ruby-prof'
+  gem 'rubocop', require: false
+  gem 'flay'#, github: 'seattlerb/flay'
+  gem 'ruby2ruby'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
