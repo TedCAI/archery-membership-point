@@ -2,20 +2,36 @@ h2 用户详情
 
 h3 积分详情
 
-detail
+/detail
+/  table.score
+/    thead
+/      tr
+/        th = "#"
+/        th 日期
+/        /th email
+/        /th uid
+/        /th total score
+/    tbody
+/      - @membership_records.each do |record|
+/        tr
+/          td = record.id
+/          td = record.record_time
+/          /td = user.email
+/          /td = user.uid
+/          /td = user.total_score
+
+- @membership_records.order(record_time: :desc).each do |record|
+  h4 = record.record_time&.strftime("%Y-%m-%d")
   table.score
-    thead
-      tr
-        th = "#"
-        th 日期
-        /th email
-        /th uid
-        /th total score
     tbody
-      - @membership_records.each do |record|
+      - record.membership_score_policies.each do |policy|
         tr
-          td = record.id
-          td = record.record_time
-          /td = user.email
-          /td = user.uid
-          /td = user.total_score
+          td = policy.name
+          td = policy.score
+
+      tr
+        td 总计
+        td = record.membership_score_policies.map(&:score).sum
+      tr
+        td 当前积分
+        td = @score_list[record.id]

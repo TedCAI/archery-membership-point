@@ -6,6 +6,7 @@ table.user
       th email
       th uid
       th total score
+      th
   tbody
     - @users.each do |user|
       tr
@@ -14,3 +15,4 @@ table.user
         td = user.email
         td = user.uid
         td = user.total_score
+        td = link_to "Edit", user_path(user), target: '_blank'
