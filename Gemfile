@@ -48,10 +48,11 @@ group :development do
   gem 'capistrano',  '~> 3.1'
   gem 'capistrano-rvm'
   gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-passenger'
+  # gem 'capistrano-passenger'
   gem 'capistrano-bundler', '~> 1.1.2'
-  gem 'capistrano-maintenance', '~> 1.0', require: false
-  gem 'capistrano-sidekiq'
+  gem 'capistrano3-puma'
+  # gem 'capistrano-maintenance', '~> 1.0', require: false
+  # gem 'capistrano-sidekiq'
   # gem 'rails-footnotes'
   # gem 'better_errors'
   # gem 'annotate'
