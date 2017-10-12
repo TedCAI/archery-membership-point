@@ -1,5 +1,6 @@
 class UsersController < BaseController
   before_action :set_user, only: [:show]
+  before_action :authenticate_user!
 
   def index
     @users = User.all

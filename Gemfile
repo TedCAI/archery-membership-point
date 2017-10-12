@@ -42,7 +42,7 @@ gem 'jquery-rails', github: 'rails/jquery-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'devise'
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano',  '~> 3.1'
