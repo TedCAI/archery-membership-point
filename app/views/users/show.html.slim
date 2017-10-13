@@ -1,15 +1,36 @@
 h2 用户详情
-.form-group
-  label 用户名：
-  '
-  = @user.name
-.form-group
-  label 当前总积分：
-  '
-  = @user.total_score
-- if current_user.id == @user.id
+- if current_user.id != @user.id
   .form-group
-    = link_to "添加新的积分详情", new_record_user_path
+    label 用户名：
+    '
+    = @user.name
+  .form-group
+    label 初始积分：
+    '
+    = @user.initial_score
+  .form-group
+    label 当前总积分：
+    '
+    = @user.total_score
+- else
+  = form_for @user, url: user_path, method: :patch, html: { id: 'user', class: 'user' } do |f|
+    .form-group
+      label 用户名：
+      '
+      = text_field_tag :name, @user.name, required: true
+    .form-group
+      label 初始积分：
+      '
+      = text_field_tag :initial_score, @user.initial_score, required: true
+    .form-group
+      label 当前总积分：
+      '
+      = @user.total_score
+    .form-group
+      = link_to "添加新的积分详情", new_record_user_path
+    .row
+      .form-group
+        = f.submit "保存"
 
 h3 积分详情
 

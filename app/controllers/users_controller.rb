@@ -1,5 +1,5 @@
 class UsersController < BaseController
-  before_action :set_user, only: [:show, :new_record, :create_new_record]
+  before_action :set_user, only: [:show, :new_record, :create_new_record, :update]
   before_action :authenticate_user!
 
   def index
@@ -16,6 +16,11 @@ class UsersController < BaseController
         @score_list[record.id] = initial_score
       end
     end
+  end
+
+  def update
+    @user.update(update_params)
+    redirect_to user_path(@user.id)
   end
 
   def new_record
@@ -42,5 +47,9 @@ class UsersController < BaseController
 
   def set_user
     @user = User.find_by(id: params[:id])
+  end
+
+  def update_params
+    params.permit :name, :initial_score
   end
 end
