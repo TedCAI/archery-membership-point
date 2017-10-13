@@ -27,7 +27,7 @@ class UsersController < BaseController
     daily_10m, daily_18m, basic_score = params[:daily_10m], params[:daily_18m], params[:basic_score]
     time = Time.new(year, month, day)
     records = @user.membership_records.where(record_time: time)
-    if @user.id == curent_user.id && records.blank?
+    if @user.id == current_user.id && records.blank?
       membership_record = @user.membership_records.create
       membership_record.update(record_time: time)
       [daily_10m, daily_18m, basic_score].each do |policy_id|
