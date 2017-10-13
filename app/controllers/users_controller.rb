@@ -43,6 +43,10 @@ class UsersController < BaseController
     redirect_to user_path(@user.id)
   end
 
+  def logout
+    sign_out_and_redirect(current_user)
+  end
+
   private
 
   def set_user

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
       get :new_record
       post :create_new_record
     end
+
+    collection do
+      get :logout
+    end
   end
 
   root to: "users#index"
