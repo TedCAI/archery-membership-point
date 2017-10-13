@@ -1,4 +1,15 @@
 h2 用户详情
+.form-group
+  label 用户名：
+  '
+  = @user.name
+.form-group
+  label 当前总积分：
+  '
+  = @user.total_score
+- if current_user.id == @user.id
+  .form-group
+    = link_to "添加新的积分详情", new_record_user_path
 
 h3 积分详情
 
