@@ -52,18 +52,21 @@ h3 积分详情
 /          /td = user.uid
 /          /td = user.total_score
 
-- @membership_records.order(record_time: :desc).each do |record|
-  h4 = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
-  table.score
-    tbody
-      - record.membership_score_policies.each do |policy|
-        tr
-          td = policy.name
-          td = policy.score
+- @membership_records.order(record_time: :desc).group_by(&:year_and_month).each do |key, records|
+    h4 = key
+    details
+      - records.each do |record|
+        h5 = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
+        table.score
+          tbody
+            - record.membership_score_policies.each do |policy|
+              tr
+                td = policy.name
+                td = policy.score
 
-      tr
-        td 总计
-        td = record.membership_score_policies.map(&:score).sum
-      tr
-        td 当前积分
-        td = @score_list[record.id]
+            tr
+              td 总计
+              td = record.membership_score_policies.map(&:score).sum
+            tr
+              td 当前积分
+              td = @score_list[record.id]
