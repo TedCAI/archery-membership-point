@@ -40,6 +40,8 @@ gem 'best_in_place', github: 'bernat/best_in_place'#, '~> 3.0.1' # https://githu
 # Use jquery as the JavaScript library
 gem 'jquery-rails', github: 'rails/jquery-rails'
 
+gem 'jquery-datatables-rails', '~> 3.4.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'devise'

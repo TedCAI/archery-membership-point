@@ -11,5 +11,15 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require datatables/dataTables.bootstrap
+ *= require plugins/datatables/dataTables.bootstrap
+ *= require plugins/summernote
+ *= require plugins/bootstrap-switch
+ *= require plugins/bootstrap-slider
+ *= require plugins/daterangepicker
+ *= require plugins/bootstrap.vertical-tabs
+ *= require plugins/jquery.tagsinput.min
+ *= require plugins/cropper
  *= require_self
+
  */
