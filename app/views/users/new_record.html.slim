@@ -38,6 +38,30 @@ h2 添加新的积分详情
         '
         |
 
+    h4 10米月榜
+    .monthly_10m
+      = radio_button_tag :monthly_10m, 0, true
+      label 无
+      '
+      |
+      - [*4..6].each do |id|
+        = radio_button_tag :monthly_10m, id, false
+        label = MembershipScorePolicy.find(id).name
+        '
+        |
+
+    h4 18米月榜
+    .monthly_18m
+      = radio_button_tag :monthly_18m, 0, true
+      label 无
+      '
+      |
+      - [*10..12].each do |id|
+        = radio_button_tag :monthly_18m, id, false
+        label = MembershipScorePolicy.find(id).name
+        '
+        |
+
     h4 报道分
     .basic
       = radio_button_tag :basic_score, 13, true
