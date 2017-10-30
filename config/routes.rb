@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     member do
       get :new_record
       post :create_new_record
+      get :edit_record
+      patch :update_record
     end
 
     collection do

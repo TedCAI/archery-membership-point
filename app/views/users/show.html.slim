@@ -56,7 +56,11 @@ h3 积分详情
     h4 = key
     details
       - records.each do |record|
-        h5 = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
+        h5
+          = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
+          '
+          /button type="button" 修改记录
+          = link_to "修改记录", edit_record_user_path(id: @user.id, record_id: record.id), method: :get
         table.score
           tbody
             - record.membership_score_policies.each do |policy|
