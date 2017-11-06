@@ -16,6 +16,8 @@ gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', github: "rails/sass-rails"
 
+gem 'popper_js'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -38,9 +40,10 @@ gem "breadcrumbs_on_rails" # https://github.com/weppos/breadcrumbs_on_rails crea
 # gem "simple-navigation" # https://github.com/codeplant/simple-navigation  creating navigations (with multiple levels) Render your navigation as html list, link list or breadcrumbs.
 gem 'best_in_place', github: 'bernat/best_in_place'#, '~> 3.0.1' # https://github.com/bernat/best_in_place A RESTful unobtrusive jQuery Inplace-Editor and a helper as a Rails Gem
 # Use jquery as the JavaScript library
-gem 'jquery-rails', github: 'rails/jquery-rails'
+gem 'jquery-rails'
 
 gem 'jquery-datatables-rails', '~> 3.4.0'
+gem 'bootstrap', '~> 4.0.0.beta2.1'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require rails-ujs
 //= require jquery-3.2.1.min
+//= require jquery3
+//= require popper
+//= require bootstrap
 //= require plugins/select2
 //= require plugins/URI
 //= require plugins/datatables/jquery.dataTables.min
@@ -38,7 +41,5 @@
 //= require plugins/jquery.sortable
 //= require plugins/jquery.deals
 //= require plugins/bootstrap-tab-hash
-//= require datatables/jquery.dataTables.min
-//= require datatables/dataTables.bootstrap.min
 //= require turbolinks
 //= require_tree .

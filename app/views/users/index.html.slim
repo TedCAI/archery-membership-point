@@ -1,24 +1,38 @@
-.table-responsive.dataTables_wrapper
-  table#user.table.table-striped.table-bordered
-    thead
-      tr
-        th = "#"
-        th name
-        th email
-        /th uid
-        th total score
-        th
-    tbody
-      - @users.each do |user|
-        tr
-          td = user.id
-          td = user.name
-          td = user.email
-          /td = user.uid
-          td = user.total_score
-          td = link_to "Edit", user_path(user), target: '_blank'
+.content.container-fluid style="max-width: 752px;"
+  .row
+    .col-md-12.col-xs-12
+      .box
+        .box-header
+          h3.box-title 用户列表
+        .box-body
+          .dataTables_wrapper
+              table#user.table.table-striped.table-bordered
+                thead
+                  tr
+                    th = "#"
+                    th name
+                    th email
+                    /th uid
+                    th total score
+                    th
+                tbody
+                  - @users.each do |user|
+                    tr
+                      td = user.id
+                      td = user.name
+                      td = user.email
+                      /td = user.uid
+                      td = user.total_score
+                      td = link_to "Edit", user_path(user), target: '_blank'
+
 
 javascript:
   $(document).ready(function() {
-      $('#user').DataTable();
+      $('#user').DataTable({
+          responsive: true,
+          paging: false,
+          info: false,
+          searching: false,
+          lengthChange: false
+      });
   } );
