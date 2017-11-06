@@ -28,14 +28,10 @@
         '
         = text_field_tag :initial_score, @user.total_score, disabled: true, class: "form-control"
       .form-group
-        button.add_new_record.btn.btn-primary type="button" = "添加新的积分详情"
-        |
-        '
         button.btn.btn-primary = "保存"
-        /= link_to "添加新的积分详情", new_record_user_path
-      /.row
-        .form-group
-          = f.submit "保存"
+
+    .form-group
+      = button_to "添加新的积分详情", new_record_user_path, class: "create_new_record_link btn btn-primary", method: :get
 
   h3 积分详情
 
@@ -46,7 +42,6 @@
           h5
             = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
             '
-            /button type="button" 修改记录
             = link_to "修改记录", edit_record_user_path(id: @user.id, record_id: record.id), method: :get
           table.score
             tbody
