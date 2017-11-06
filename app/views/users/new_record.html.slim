@@ -1,76 +1,93 @@
-h2 添加新的积分详情
+.content.container-fluid
+  h2 添加新的积分详情
 
-= form_for @user, url: create_new_record_user_path, method: :post, html: { id: 'new_record', class: 'new_record' } do |f|
-  .form-group
-    label 日期:
-    = number_field_tag :year, Time.now.year, required: true
-    '
-    | 年
-    = number_field_tag :month, Time.now.month, required: true
-    '
-    | 月
-    = number_field_tag :day, Time.now.day, required: true
-    '
-    | 日
+  = form_for @user, url: create_new_record_user_path, method: :post, html: { id: 'new_record', class: 'new_record' } do |f|
+    .form-group
+      .row
+        .col-11.col-offset-1
+          label 日期:
+      .row
+        .col-9.col-offset-1
+          = number_field_tag :year, Time.now.year, required: true, class: "form-control", step: 1
+        .col-2
+          p 年
+        .clearfix
 
-  .form-group
-    h4 10米日榜
-    .daily_10m
-      = radio_button_tag :daily_10m, 0, true
-      label 无
-      '
-      |
-      - [*1..3].each do |id|
-        = radio_button_tag :daily_10m, id, false
-        label = MembershipScorePolicy.find(id).name
-        '
-        |
+      .row
+        .col-9.col-offset-1
+          = number_field_tag :month, Time.now.month, required: true, class: "form-control", step: 1
+        .col-2
+          p 月
+        .clearfix
 
-    h4 18米日榜
-    .daily_18m
-      = radio_button_tag :daily_18m, 0, true
-      label 无
-      '
-      |
-      - [*7..9].each do |id|
-        = radio_button_tag :daily_18m, id, false
-        label = MembershipScorePolicy.find(id).name
-        '
-        |
+      .row
+        .col-9.col-offset-1
+          = number_field_tag :day, Time.now.day, required: true, class: "form-control", step: 1
+        .col-2
+          p 日
 
-    h4 10米月榜
-    .monthly_10m
-      = radio_button_tag :monthly_10m, 0, true
-      label 无
-      '
-      |
-      - [*4..6].each do |id|
-        = radio_button_tag :monthly_10m, id, false
-        label = MembershipScorePolicy.find(id).name
-        '
-        |
+    .form-group
+      h4 10米日榜
+      .daily_10m
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :daily_10m, 0, true
+            label 无
+        - [*1..3].each do |id|
+          .row
+            .col-11.col-offset-1
+              = radio_button_tag :daily_10m, id, false
+              label = MembershipScorePolicy.find(id).name
 
-    h4 18米月榜
-    .monthly_18m
-      = radio_button_tag :monthly_18m, 0, true
-      label 无
-      '
-      |
-      - [*10..12].each do |id|
-        = radio_button_tag :monthly_18m, id, false
-        label = MembershipScorePolicy.find(id).name
-        '
-        |
+      h4 18米日榜
+      .daily_18m
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :daily_18m, 0, true
+            label 无
+        - [*7..9].each do |id|
+          .row
+            .col-11.col-offset-1
+              = radio_button_tag :daily_18m, id, false
+              label = MembershipScorePolicy.find(id).name
 
-    h4 报道分
-    .basic
-      = radio_button_tag :basic_score, 13, true
-      label 有
-      '
-      |
-      = radio_button_tag :basic_score, 0, false
-      label 无
+      h4 10米月榜
+      .monthly_10m
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :monthly_10m, 0, true
+            label 无
+        - [*4..6].each do |id|
+          .row
+            .col-11.col-offset-1
+              = radio_button_tag :monthly_10m, id, false
+              label = MembershipScorePolicy.find(id).name
 
-  br
-  .form-group
-    = f.submit "提交"
+      h4 18米月榜
+      .monthly_18m
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :monthly_18m, 0, true
+            label 无
+        - [*10..12].each do |id|
+          .row
+            .col-11.col-offset-1
+              = radio_button_tag :monthly_18m, id, false
+              label = MembershipScorePolicy.find(id).name
+          '
+          |
+
+      h4 报道分
+      .basic
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :basic_score, 13, true
+            label 有
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :basic_score, 0, false
+            label 无
+
+    br
+    .form-group
+      = f.submit "提交", class: "btn btn-primary"
