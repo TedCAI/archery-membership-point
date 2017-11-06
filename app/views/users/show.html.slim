@@ -1,76 +1,63 @@
-h2 用户详情
-- if current_user.id != @user.id
-  .form-group
-    label 用户名：
-    '
-    = @user.name
-  .form-group
-    label 初始积分：
-    '
-    = @user.initial_score
-  .form-group
-    label 当前总积分：
-    '
-    = @user.total_score
-- else
-  = form_for @user, url: user_path, method: :patch, html: { id: 'user', class: 'user' } do |f|
+.content.container
+  h2 用户详情
+  - if current_user.id != @user.id
     .form-group
       label 用户名：
       '
-      = text_field_tag :name, @user.name, required: true
+      = @user.name
     .form-group
       label 初始积分：
       '
-      = text_field_tag :initial_score, @user.initial_score, required: true
+      = @user.initial_score
     .form-group
       label 当前总积分：
       '
       = @user.total_score
-    .form-group
-      = link_to "添加新的积分详情", new_record_user_path
-    .row
+  - else
+    = form_for @user, url: user_path, method: :patch, html: { id: 'user', class: 'user' } do |f|
       .form-group
-        = f.submit "保存"
+        label 用户名：
+        '
+        = text_field_tag :name, @user.name, required: true, class: "form-control"
+      .form-group
+        label 初始积分：
+        '
+        = text_field_tag :initial_score, @user.initial_score, required: true, class: "form-control"
+      .form-group
+        label 当前总积分：
+        '
+        = text_field_tag :initial_score, @user.total_score, disabled: true, class: "form-control"
+      .form-group
+        button.add_new_record.btn.btn-primary type="button" = "添加新的积分详情"
+        |
+        '
+        button.btn.btn-primary = "保存"
+        /= link_to "添加新的积分详情", new_record_user_path
+      /.row
+        .form-group
+          = f.submit "保存"
 
-h3 积分详情
+  h3 积分详情
 
-/detail
-/  table.score
-/    thead
-/      tr
-/        th = "#"
-/        th 日期
-/        /th email
-/        /th uid
-/        /th total score
-/    tbody
-/      - @membership_records.each do |record|
-/        tr
-/          td = record.id
-/          td = record.record_time
-/          /td = user.email
-/          /td = user.uid
-/          /td = user.total_score
+  - @membership_records.order(record_time: :desc).group_by(&:year_and_month).each do |key, records|
+      h4 = key
+      details
+        - records.each do |record|
+          h5
+            = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
+            '
+            /button type="button" 修改记录
+            = link_to "修改记录", edit_record_user_path(id: @user.id, record_id: record.id), method: :get
+          table.score
+            tbody
+              - record.membership_score_policies.each do |policy|
+                tr
+                  td = policy.name
+                  td = policy.score
 
-- @membership_records.order(record_time: :desc).group_by(&:year_and_month).each do |key, records|
-    h4 = key
-    details
-      - records.each do |record|
-        h5
-          = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
-          '
-          /button type="button" 修改记录
-          = link_to "修改记录", edit_record_user_path(id: @user.id, record_id: record.id), method: :get
-        table.score
-          tbody
-            - record.membership_score_policies.each do |policy|
               tr
-                td = policy.name
-                td = policy.score
-
-            tr
-              td 总计
-              td = record.membership_score_policies.map(&:score).sum
-            tr
-              td 当前积分
-              td = @score_list[record.id]
+                td 总计
+                td = record.membership_score_policies.map(&:score).sum
+              tr
+                td 当前积分
+                td = @score_list[record.id]
