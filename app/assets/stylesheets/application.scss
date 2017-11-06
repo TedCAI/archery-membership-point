@@ -12,10 +12,13 @@
 */
 @import 'datatables/dataTables.bootstrap';
 @import 'plugins/datatables/dataTables.bootstrap';
+@import 'plugins/datatables/jquery.dataTables';
+@import 'plugins/datatables/jquery.dataTables_themeroller';
 @import 'plugins/summernote';
 @import 'plugins/bootstrap-switch';
 @import 'plugins/bootstrap-slider';
 @import 'plugins/bootstrap.vertical-tabs';
 @import 'plugins/jquery.tagsinput.min';
 @import 'plugins/cropper';
+@import 'plugins/bootstrap3-wysihtml5.min';
 @import 'bootstrap';

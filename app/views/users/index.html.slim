@@ -1,10 +1,10 @@
-.content.container-fluid style="max-width: 752px;"
+.content.container
   .row
     .col-md-12.col-xs-12
       .box
         .box-header
           h3.box-title 用户列表
-        .box-body
+        .box-body.table-responsive
           .dataTables_wrapper
               table#user.table.table-striped.table-bordered
                 thead
@@ -29,10 +29,19 @@
 javascript:
   $(document).ready(function() {
       $('#user').DataTable({
-          responsive: true,
           paging: false,
           info: false,
           searching: false,
+          autoWidth: true,
+          "border-collapse": 'collapse',
+          width: '100%',
+          //scrollX: "400px",
+          "processing": true,
+          "ordering": true,
+          "bRetrieve": true,
+          "bScrollAutoCss": false,
           lengthChange: false
       });
+
+      $("#user").dataTable().fnAdjustColumnSizing();
   } );
