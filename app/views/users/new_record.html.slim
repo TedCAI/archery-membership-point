@@ -7,24 +7,22 @@
         .col-11.col-offset-1
           label 日期:
       .row
-        .col-9.col-offset-1
-          = number_field_tag :year, Time.now.year, required: true, class: "form-control", step: 1
-        .col-2
-          p 年
-        .clearfix
+        .col-11.col-offset-1
+          .input-group
+            = number_field_tag :year, Time.now.year, required: true, class: "form-control", step: 1
+            span.input-group-addon 年
 
       .row
-        .col-9.col-offset-1
-          = number_field_tag :month, Time.now.month, required: true, class: "form-control", step: 1
-        .col-2
-          p 月
-        .clearfix
+        .col-11.col-offset-1
+          .input-group
+            = number_field_tag :month, Time.now.month, required: true, class: "form-control", step: 1
+            span.input-group-addon 月
 
       .row
-        .col-9.col-offset-1
-          = number_field_tag :day, Time.now.day, required: true, class: "form-control", step: 1
-        .col-2
-          p 日
+        .col-11.col-offset-1
+          .input-group
+            = number_field_tag :day, Time.now.day, required: true, class: "form-control", step: 1
+            span.input-group-addon 日
 
     .form-group
       h4 10米日榜

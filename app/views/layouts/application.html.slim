@@ -8,18 +8,27 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
   body
-    .wrapper
-      .content-wrapper
-        .box-body
-          - if current_user
-            h4 = "当前登录用户： #{current_user&.email}"
-            .form-group
-              = button_to "登出", logout_users_path, method: :get
-                /.form-group
-                /  = form_for logout_users_path, method: :get, html: { id: 'sign_out', class: 'sign_out' } do |f|
-                /    = f.submit "登出"
+    - if notice.present? || alert.present?
+      section.notices
+        .notice
           p.notice
             = notice
           p.alert
             = alert
+
+    - if current_user
+      section.notices
+          .container-fluid
+            .panel.panel-default
+              .panel-heading
+              .panel-body.pull-right
+                span.float-left = "#{current_user.name} (#{current_user&.email})"
+                /.col-5.pull-right
+                = button_to "登出", logout_users_path, method: :get, class: "btn btn-danger float-right"
+      br
+      br
+
+    section.content
+      .box
+        .box-body
           = yield

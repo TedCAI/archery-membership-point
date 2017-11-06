@@ -17,6 +17,7 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require bootstrap-collapse
 //= require plugins/select2
 //= require plugins/URI
 //= require plugins/datatables/jquery.dataTables.min
