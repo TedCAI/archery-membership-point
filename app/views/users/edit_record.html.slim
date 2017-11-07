@@ -1,72 +1,76 @@
-h2
-  | 添加新的积分详情
+.content.container-fluid
+  h2 添加新的积分详情
   '
   = link_to "返回用户详情", user_path(@user)
 
-= form_for @user, url: update_record_user_path(id: @user.id, record_id: @record.id), method: :patch, html: { id: 'new_record', class: 'new_record' } do |f|
-  .form-group
-    H4 = "日期：#{@record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")}"
+  = form_for @user, url: update_record_user_path(id: @user.id, record_id: @record.id), method: :patch, html: { id: 'new_record', class: 'new_record' } do |f|
+    .form-group
+      .row
+        .col-11.col-offset-1
+          label = "日期：#{@record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")}"
 
-  - details = @record.membership_record_details
-  - policy_ids = details.map(&:membership_score_policy_id)
-  .form-group
-    h4 10米日榜
-    .daily_10m
-      = radio_button_tag :daily_10m, 0, true
-      label 无
-      '
-      |
-      - [*1..3].each do |id|
-        = radio_button_tag :daily_10m, id, (policy_ids.include?(id) ? true : false)
-        label = MembershipScorePolicy.find(id).name
-        '
-        |
+    - details = @record.membership_record_details
+    - policy_ids = details.map(&:membership_score_policy_id)
+    .form-group
+      h4 10米日榜
+      .daily_10m
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :daily_10m, 0, true
+            label 无
+        - [*1..3].each do |id|
+          .row
+            .col-11.col-offset-1
+              = radio_button_tag :daily_10m, id, (policy_ids.include?(id) ? true : false)
+              label = MembershipScorePolicy.find(id).name
 
-    h4 18米日榜
-    .daily_18m
-      = radio_button_tag :daily_18m, 0, true
-      label 无
-      '
-      |
-      - [*7..9].each do |id|
-        = radio_button_tag :daily_18m, id, (policy_ids.include?(id) ? true : false)
-        label = MembershipScorePolicy.find(id).name
-        '
-        |
+      h4 18米日榜
+      .daily_18m
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :daily_18m, 0, true
+            label 无
+        - [*7..9].each do |id|
+          .row
+            .col-11.col-offset-1
+              = radio_button_tag :daily_18m, id, (policy_ids.include?(id) ? true : false)
+              label = MembershipScorePolicy.find(id).name
 
-    h4 10米月榜
-    .monthly_10m
-      = radio_button_tag :monthly_10m, 0, true
-      label 无
-      '
-      |
-      - [*4..6].each do |id|
-        = radio_button_tag :monthly_10m, id, (policy_ids.include?(id) ? true : false)
-        label = MembershipScorePolicy.find(id).name
-        '
-        |
+      h4 10米月榜
+      .monthly_10m
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :monthly_10m, 0, true
+            label 无
+        - [*4..6].each do |id|
+          .row
+            .col-11.col-offset-1
+              = radio_button_tag :monthly_10m, id, (policy_ids.include?(id) ? true : false)
+              label = MembershipScorePolicy.find(id).name
 
-    h4 18米月榜
-    .monthly_18m
-      = radio_button_tag :monthly_18m, 0, true
-      label 无
-      '
-      |
-      - [*10..12].each do |id|
-        = radio_button_tag :monthly_18m, id, (policy_ids.include?(id) ? true : false)
-        label = MembershipScorePolicy.find(id).name
-        '
-        |
+      h4 18米月榜
+      .monthly_18m
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :monthly_18m, 0, true
+            label 无
+        - [*10..12].each do |id|
+          .row
+            .col-11.col-offset-1
+              = radio_button_tag :monthly_18m, id, (policy_ids.include?(id) ? true : false)
+              label = MembershipScorePolicy.find(id).name
 
-    h4 报道分
-    .basic
-      = radio_button_tag :basic_score, 13, (policy_ids.include?(13) ? true : false)
-      label 有
-      '
-      |
-      = radio_button_tag :basic_score, 0, (policy_ids.include?(13) ? false : true)
-      label 无
+      h4 报道分
+      .basic
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :basic_score, 13, (policy_ids.include?(13) ? true : false)
+            label 有
+        .row
+          .col-11.col-offset-1
+            = radio_button_tag :basic_score, 0, (policy_ids.include?(13) ? false : true)
+            label 无
 
-  br
-  .form-group
-    = f.submit "提交"
+    br
+    .form-group
+      = f.submit "提交", class: "btn btn-primary"
