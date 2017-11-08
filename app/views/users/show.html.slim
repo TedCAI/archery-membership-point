@@ -35,25 +35,49 @@
 
   h3 积分详情
 
-  - @membership_records.order(record_time: :desc).group_by(&:year_and_month).each do |key, records|
-      h4 = key
-      details
-        - records.each do |record|
-          h5
-            = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
-            - if current_user&.id == @user.id
-              '
-              = link_to "修改记录", edit_record_user_path(id: @user.id, record_id: record.id), method: :get
-          table.score
-            tbody
-              - record.membership_score_policies.each do |policy|
-                tr
-                  td = policy.name
-                  td = policy.score
 
-              tr
-                td 总计
-                td = record.membership_score_policies.map(&:score).sum
-              tr
-                td 当前积分
-                td = @score_list[record.id]
+  - @membership_records.order(record_time: :desc).group_by(&:year_and_month).each do |key, records|
+      /h4 = key
+      - upper_layer_headding_attr = "upper_heading-#{key}"
+      - upper_layer_headding_attr_ = "##{upper_layer_headding_attr}"
+      - upper_layer_attr = "collapse-#{key}"
+      - upper_layer_attr_ = "##{upper_layer_attr}"
+
+      .card
+        .card-header role="tab" id=upper_layer_headding_attr
+          h4.mb-0
+            a.collapsed data-toggle="collapse" href=upper_layer_attr_ aria-expanded="true" aria-controls=upper_layer_attr
+              = key
+        .collapse id=upper_layer_attr role="tabpanel" aria-labelledby=upper_layer_headding_attr_ data-parent="#accordion"
+          .card-body
+
+            - records.each do |record|
+              - headding_attr = "heading-#{record.id}"
+              - headding_arrt_ = "##{headding_attr}"
+              - attr = "collapse-#{record.id}"
+              - attr_ = "##{attr}"
+              .card
+                .card-header role="tab" id=headding_attr
+                  h5.mb-0
+                    a.collapsed data-toggle="collapse" href=attr_ aria-expanded="true" aria-controls=attr
+                      = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
+                    - if current_user&.id == @user.id
+                      '
+                      = link_to "修改记录", edit_record_user_path(id: @user.id, record_id: record.id), method: :get, class: "badge badge-primary float-right"
+                  /span.float-left = record.record_time&.in_time_zone('Beijing')&.strftime("%Y-%m-%d")
+
+                .collapse id=attr role="tabpanel" aria-labelledby=headding_arrt_ data-parent="#accordion"
+                  .card-body
+                    table.score.table.table-striped
+                      tbody
+                        - record.membership_score_policies.each do |policy|
+                          tr
+                            td = policy.name
+                            td = policy.score
+
+                        tr
+                          td 总计
+                          td = record.membership_score_policies.map(&:score).sum
+                        tr
+                          td 当前积分
+                          td = @score_list[record.id]
