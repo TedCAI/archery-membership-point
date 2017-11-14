@@ -33,6 +33,20 @@
     .form-group
       = button_to "添加新的积分详情", new_record_user_path, class: "create_new_record_link btn btn-primary", method: :get
 
+  /input.hidden.score_list_array value=@score_list_array style="display: none;"
+  input.hidden.user_id value=@user.id style="display: none;"
+
+  /h3 积分趋势图
+
+  .card
+    .card-header role="tab" id="score_time_line"
+      h4.mb-0
+        a.collapsed data-toggle="collapse" href="#collapse_score_time_line" aria-expanded="true" aria-controls="collapse_score_time_line"
+          | 积分趋势图
+      .collapse id="collapse_score_time_line" role="tabpanel" aria-labelledby="#score_time_line" data-parent="#accordion"
+        .card-body.svg_body style="overflow: scroll;"
+          svg.chart width="600" height="300"
+
   h3 积分详情
 
 
@@ -81,3 +95,97 @@
                         tr
                           td 当前积分
                           td = @score_list[record.id]
+
+
+javascript:
+    var user_id = $(".user_id").val()
+    $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: '/users/' + user_id,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            draw_chart(data.score_list);
+        },
+        error: function (result) {
+            error();
+        }
+    });
+
+    function error() {
+        console.log("error")
+    }
+
+    var draw_chart = function(data){
+        var margin = {top: 20, right: 20, bottom: 30, left: 30},
+            width = 600 - margin.left - margin.right,
+            height = 300 - margin.top - margin.bottom;
+
+        var x = d3.scaleTime()
+            .rangeRound([0, width]);
+
+        var y = d3.scaleLinear()
+            .rangeRound([height, 0]);
+        //.range([height, 0])
+        //.domain([d3.min(data), d3.max(data)]);
+
+        var chart = d3.select("svg");
+
+        var line = d3.line()
+            .x(function (d) {
+                return x(d.date);
+            })
+            .y(function (d) {
+                return y(d.score);
+            });
+
+        var parseTime = function(date){
+            date_arr = date.split('-');
+            return new Date(date_arr[0], date_arr[1], date_arr[2]);
+        };
+
+        var g = chart.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var formated_data = d3.tsvParse(data, function(d){
+            d.date = parseTime(d.date);
+            d.score = +d.score;
+            return d;
+        });
+
+        console.log(formated_data)
+
+        x.domain(d3.extent(formated_data, function (d) {
+            return d.date;
+        }));
+        y.domain(d3.extent(formated_data, function (d) {
+            return d.score;
+        }));
+
+        g.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .select(".domain")
+            .remove();
+
+        g.append("g")
+            .call(d3.axisLeft(y))
+            .append("text")
+            .attr("fill", "#000")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .text("积分");
+
+        g.append("path")
+            .datum(formated_data)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 1.5)
+            .attr("d", line);
+
+    };

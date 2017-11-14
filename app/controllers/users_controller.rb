@@ -1,5 +1,5 @@
 class UsersController < BaseController
-  before_action :set_user, only: [:show, :new_record, :create_new_record, :update, :edit_record, :update_record]
+  before_action :set_user, only: [:show, :new_record, :create_new_record, :update, :edit_record, :update_record, :temp_show]
   before_action :authenticate_user!
 
   def index
@@ -10,12 +10,37 @@ class UsersController < BaseController
     @membership_records = @user&.membership_records || []
     if @membership_records.present?
       @score_list = {}
+      @score_list_array = ""
+      @score_list_array += "date\tscore\n"
       initial_score = @user.initial_score
+      previous_record_time = nil
       @membership_records.order(record_time: :asc).each do |record|
         initial_score += record.membership_score_policies.map(&:score).sum
         @score_list[record.id] = initial_score
+        current_record_time = record.record_time.in_time_zone('Beijing').strftime("%Y-%m-%d")
+        # @score_list_array << [record.record_time&.in_time_zone('Beijing')&.strftime("%Y%m%d"), initial_score]
+        while(true) do
+          if !previous_record_time || current_record_time == previous_record_time.tomorrow.in_time_zone('Beijing').strftime("%Y-%m-%d")
+            @score_list_array += "#{current_record_time}\t#{initial_score}\n"
+            previous_record_time = record.record_time
+            break
+          else
+            previous_record_time = previous_record_time.tomorrow
+            @score_list_array += "#{previous_record_time.in_time_zone('Beijing').strftime("%Y-%m-%d")}\t#{initial_score}\n"
+          end
+        end
       end
     end
+    puts "!!!!!!!! #{@score_list_array}"
+    respond_to do |format|
+      format.html
+      # format.json { render json: {score_list: @score_list_array} }
+      format.json { render json: {score_list: @score_list_array} }
+    end
+  end
+
+  def temp_show
+
   end
 
   def update

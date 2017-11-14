@@ -42,5 +42,7 @@
 //= require plugins/jquery.sortable
 //= require plugins/jquery.deals
 //= require plugins/bootstrap-tab-hash
+//= require d3.min
+//= require user
 //= require turbolinks
 //= require_tree .
