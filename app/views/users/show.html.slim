@@ -118,7 +118,7 @@ javascript:
     }
 
     var draw_chart = function(data){
-        var margin = {top: 20, right: 20, bottom: 30, left: 30},
+        var margin = {top: 20, right: 50, bottom: 30, left: 30},
             width = 600 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
 
@@ -171,6 +171,17 @@ javascript:
 
         g.append("g")
             .call(d3.axisLeft(y))
+            .append("text")
+            .attr("fill", "#000")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .text("积分");
+
+        g.append("g")
+            .call(d3.axisRight(y))
+            .attr("transform", "translate(" + width + ",0)")
             .append("text")
             .attr("fill", "#000")
             .attr("transform", "rotate(-90)")
