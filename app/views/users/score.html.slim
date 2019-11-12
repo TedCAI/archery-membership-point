@@ -1,0 +1,27 @@
+.content.container
+  .row
+    .col-md-12.col-xs-12
+      .box
+        .box-header
+          h3.box-title 记分板
+        .box-body.table-responsive
+          .dataTables_wrapper
+            table.table.table-bordered
+              thead
+                tr
+                  / th.c-table__th = "#"
+                  th 日期
+                  th.c-table__th 总分
+                  th.c-table__th 组 1
+                  th.c-table__th 组 2
+                  / th.c-table__th
+              tbody
+                - @set_scores.each do |set_score|
+                  tr
+                    td = set_score.date
+                    td = set_score.total_score
+                    td = set_score.first_half_set&.score
+                    td = set_score.last_half_set&.score
+                    /td = user.uid
+                    / td = user.total_score
+                    / td = link_to "Edit", user_path(user), target: '_blank'

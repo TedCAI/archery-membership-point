@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post :create_new_record
       get :edit_record
       patch :update_record
+      get :score
     end
 
     collection do

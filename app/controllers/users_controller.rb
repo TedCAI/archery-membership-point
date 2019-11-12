@@ -1,5 +1,5 @@
 class UsersController < BaseController
-  before_action :set_user, only: [:show, :new_record, :create_new_record, :update, :edit_record, :update_record, :temp_show]
+  before_action :set_user, only: [:show, :new_record, :create_new_record, :update, :edit_record, :update_record, :score]
   before_action :authenticate_user!
 
   def index
@@ -39,8 +39,8 @@ class UsersController < BaseController
     end
   end
 
-  def temp_show
-
+  def score
+    @set_scores = @user.set_scores
   end
 
   def update

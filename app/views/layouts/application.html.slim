@@ -18,13 +18,13 @@ html
 
     - if current_user
       section.notices
-          .container
-            .panel.panel-default
-              .panel-heading
-              .panel-body.pull-right
-                span.float-left = "#{current_user.name} (#{current_user&.email})"
-                /.col-5.pull-right
-                = button_to "登出", logout_users_path, method: :get, class: "btn btn-danger float-right"
+        .container
+          .panel.panel-default
+            .panel-heading
+            .panel-body.pull-right
+              span.float-left = "#{current_user.name} (#{current_user&.email})"
+              /.col-5.pull-right
+              = button_to "登出", logout_users_path, method: :get, class: "btn btn-danger float-right"
       br
       br
 

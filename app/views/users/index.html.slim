@@ -6,24 +6,27 @@
           h3.box-title 用户列表
         .box-body.table-responsive
           .dataTables_wrapper
-              table#user.table.table-striped.table-bordered
-                thead
+            table.table.table-bordered
+              thead
+                tr
+                  th.c-table__th = "#"
+                  th.c-table__th name
+                  th.c-table__th email
+                  /th uid
+                  th.c-table__th membership score
+                  th.c-table__th
+              tbody
+                - @users.each do |user|
                   tr
-                    th = "#"
-                    th name
-                    th email
-                    /th uid
-                    th total score
-                    th
-                tbody
-                  - @users.each do |user|
-                    tr
-                      td = user.id
-                      td = user.name
-                      td = user.email
-                      /td = user.uid
-                      td = user.total_score
-                      td = link_to "Edit", user_path(user), target: '_blank'
+                    td = user.id
+                    td = user.name
+                    td = user.email
+                    /td = user.uid
+                    td = user.total_score
+                    td.c-table__td
+                      = link_to "Edit", user_path(user), target: '_blank'
+                      br
+                      = link_to "Score", score_user_path(user), target: '_blank'
 
 
 javascript:
