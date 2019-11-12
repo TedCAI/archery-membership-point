@@ -14,8 +14,8 @@ default: &default
 development:
   <<: *default
   database: archery_development
-  username: teddg
-  password: hlh2823253
+  username: postgres
+  password:
 #  host: postgres
   port: 5432
 

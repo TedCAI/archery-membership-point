@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012100618) do
+ActiveRecord::Schema.define(version: 20191112034535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,22 @@ ActiveRecord::Schema.define(version: 20171012100618) do
     t.string "name"
     t.string "slug"
     t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "set_score_details", force: :cascade do |t|
+    t.integer "set_score_id"
+    t.integer "set_type", default: 0
+    t.integer "score", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "set_scores", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "total_score", default: 0
+    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

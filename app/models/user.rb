@@ -6,6 +6,7 @@ class User < ApplicationRecord
   include Timer
 
   has_many :membership_records
+  has_many :set_scores
 
   before_create :set_default_time
 
