@@ -43,11 +43,16 @@ gem 'best_in_place', github: 'bernat/best_in_place'#, '~> 3.0.1' # https://githu
 gem 'jquery-rails'
 
 gem 'jquery-datatables-rails', '~> 3.4.0'
-gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'bootstrap', '>= 4.3.1'
+gem "actionview", ">= 5.1.6.2"
+gem "nokogiri", ">= 1.10.4"
+gem "activejob", ">= 5.1.6.1"
+gem "rack", ">= 2.0.6"
+gem "loofah", ">= 2.3.1"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'devise'
+gem 'devise', '>= 4.7.1'
 group :development do
   # Use Capistrano for deployment
   gem 'capistrano',  '~> 3.1'
